@@ -1,4 +1,4 @@
-# Примеры для курса "Разработчик Java" в OTUS
+# Задания по курсу "Java Developer. Professional" в OTUS
 
 Группа 2020-12
 
