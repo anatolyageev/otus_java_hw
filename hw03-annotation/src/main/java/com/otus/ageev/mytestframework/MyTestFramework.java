@@ -12,33 +12,31 @@ public class MyTestFramework {
     private List<Method> beforeMethods;
     private List<Method> testMethods;
     private List<Method> afterMethods;
-    private int testCount;
-    private int successCount;
-    private int failureCount;
 
     public void testAll(String className) throws ClassNotFoundException {
+        int successCount = 0;
+        int failureCount = 0;
         Class<?> testClass = Class.forName(className);
         getAnnotatedMethods(testClass);
-
+        Object obj = null;
         for (Method testMethod : testMethods) {
             try {
-                Object obj = testClass.getDeclaredConstructor().newInstance();
+                obj = testClass.getDeclaredConstructor().newInstance();
                 invokeMethods(obj, beforeMethods);
                 testMethod.invoke(obj);
-                invokeMethods(obj, afterMethods);
                 successCount++;
             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                 e.printStackTrace();
                 failureCount++;
             } finally {
-                testCount++;
+                try {
+                    invokeMethods(obj, afterMethods);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        printResult();
-    }
-
-    private void printResult() {
-        System.out.println("Test count: " + testCount);
+        System.out.println("Test count: " + testMethods.size());
         System.out.println("Success test count: " + successCount);
         System.out.println("Failure test count: " + failureCount);
     }
