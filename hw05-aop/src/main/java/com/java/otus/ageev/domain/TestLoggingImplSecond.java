@@ -2,7 +2,7 @@ package com.java.otus.ageev.domain;
 
 import com.java.otus.ageev.annotation.Log;
 
-public class TestLoggingImpl implements TestLogging {
+public class TestLoggingImplSecond implements TestLogging {
     @Log
     public void calculation(int param1) {
 
