@@ -13,5 +13,13 @@ public class Atm {
        return cassetteService.getSum(sum);
     }
 
+    public Long getTotalSumInAtm(){
+        return cassetteService.totalMoneyAmount();
+    }
+
+
+    public boolean depositCash(Denomination denomination, int notesNum){
+        return cassetteService.depositCash(denomination,notesNum);
+    }
 
 }

@@ -1,13 +1,13 @@
 package otus.java.ageeev.domain;
 
-import java.util.Comparator;
-import java.util.SortedMap;
-import java.util.TreeMap;
 import otus.java.ageeev.repository.AtmCassetteRepository;
 import otus.java.ageeev.service.AtmCassetteService;
 
+import java.util.SortedMap;
+
 public class Context {
-    //TODO в конструкторе реализовать инициализацию всех классов как  com.epam.anatolii.ageev.eshop.ComputerShop
+   // конструкторе реализовать инициализацию всех классов как
+    // "com.epam.anatolii.ageev.eshop.ComputerShop"
 
     private AtmCassetteRepository atmCassetteRepository;
     private AtmCassetteService atmCassetteService;
