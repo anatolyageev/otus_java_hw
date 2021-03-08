@@ -4,6 +4,7 @@ import ru.otus.model.Message;
 
 public class LoggerProcessor implements Processor {
 
+
     private final Processor processor;
 
     public LoggerProcessor(Processor processor) {
