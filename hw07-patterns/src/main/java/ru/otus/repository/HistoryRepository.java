@@ -2,11 +2,12 @@ package ru.otus.repository;
 
 import java.util.Map;
 import ru.otus.model.Message;
+import ru.otus.model.MessageHistory;
 
 public interface HistoryRepository {
-    Message addHistory(Message message);
+    MessageHistory addHistory(MessageHistory messageHistory);
 
-    Message getHistoryById(long id);
+    MessageHistory getHistoryById(long id);
 
-    Map<Long, Message> getAllHistory();
+    Map<Long, MessageHistory> getAllHistory();
 }

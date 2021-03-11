@@ -1,5 +1,7 @@
 package ru.otus;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import ru.otus.handler.ComplexProcessor;
 import ru.otus.listener.ListenerHistory;
@@ -32,9 +34,8 @@ public class HomeWork {
         var historyService = new HistoryServiceImpl(historyRepository);
 
         var processor1 = new ChangeOrderProcessor();
-        var processor2 = new EvenSecondProcessorWrapper(new EvenSecondProcessor());
+        var processor2 = new EvenSecondProcessorWrapper(new EvenSecondProcessor(), LocalDateTime::now);
         var processors = List.of(processor1, processor2);
-
         var listener1 = new ListenerPrinter();
         var listener2 = new ListenerHistory(historyService);
 
@@ -54,7 +55,7 @@ public class HomeWork {
 
         System.out.println("result:" + result);
 
-        System.out.println("From history: " + historyService.getHistoryById(1));
+        System.out.println("From history: " + historyService.getHistoryById(1).getOldMessage());
 
         handler.removeListener(listener1);
         handler.removeListener(listener2);

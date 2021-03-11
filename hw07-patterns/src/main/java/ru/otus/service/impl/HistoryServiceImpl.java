@@ -2,6 +2,7 @@ package ru.otus.service.impl;
 
 import java.util.Map;
 import ru.otus.model.Message;
+import ru.otus.model.MessageHistory;
 import ru.otus.repository.HistoryRepository;
 
 public class HistoryServiceImpl implements ru.otus.service.HistoryService {
@@ -12,17 +13,17 @@ public class HistoryServiceImpl implements ru.otus.service.HistoryService {
     }
 
     @Override
-    public Message addHistory(Message message) {
-        return historyRepository.addHistory(message);
+    public MessageHistory addHistory(MessageHistory messageHistory) {
+        return historyRepository.addHistory(messageHistory);
     }
 
     @Override
-    public Message getHistoryById(long id) {
+    public MessageHistory getHistoryById(long id) {
         return historyRepository.getHistoryById(id);
     }
 
     @Override
-    public Map<Long, Message> getAllHistory() {
+    public Map<Long, MessageHistory> getAllHistory() {
         return historyRepository.getAllHistory();
     }
 }
