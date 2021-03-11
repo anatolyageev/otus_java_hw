@@ -7,7 +7,7 @@ import ru.otus.model.Message;
 import ru.otus.repository.HistoryRepository;
 
 public class HistoryRepositoryImpl implements HistoryRepository {
-    private Map<Long, Message> history;
+    private final Map<Long, Message> history;
 
     public HistoryRepositoryImpl() {
         this.history = new HashMap<>();

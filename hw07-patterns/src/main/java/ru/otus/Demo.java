@@ -14,11 +14,13 @@ public class Demo {
         var processors = List.of(new ProcessorConcatFields(),
                 new LoggerProcessor(new ProcessorUpperField10()));
 
-        var complexProcessor = new ComplexProcessor(processors, (ex) -> {});
+        var complexProcessor = new ComplexProcessor(processors, ex -> {
+        });
         var listenerPrinter = new ListenerPrinter();
         complexProcessor.addListener(listenerPrinter);
 
-        var message = new Message.Builder(1L)
+        var message = Message.builder()
+                .id(1L)
                 .field1("field1")
                 .field2("field2")
                 .field3("field3")

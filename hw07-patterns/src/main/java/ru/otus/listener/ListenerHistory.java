@@ -5,7 +5,7 @@ import ru.otus.service.HistoryService;
 
 public class ListenerHistory implements Listener {
 
-    private HistoryService historyService;
+    private final HistoryService historyService;
 
     public ListenerHistory(HistoryService historyService) {
         this.historyService = historyService;

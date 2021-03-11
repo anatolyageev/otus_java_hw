@@ -18,12 +18,14 @@ class ChangeOrderProcessorTest {
 
     @BeforeEach
     public void init() {
-        message = new Message.Builder(1)
+        message = Message.builder()
+                .id(1)
                 .field11("Field11")
                 .field12("Field12")
                 .build();
 
-        messageTemplate = new Message.Builder(1)
+        messageTemplate = Message.builder()
+                .id(1)
                 .field11("Field12")
                 .field12("Field11")
                 .build();
@@ -43,6 +45,8 @@ class ChangeOrderProcessorTest {
         assertEquals(message, messageTemplate);
     }
 
+
+
     @Test
     @DisplayName("Test for check even second")
     public void evenSecondProcessor_ShouldThrowException() {
@@ -55,5 +59,19 @@ class ChangeOrderProcessorTest {
 
         //then
         assertThrows(EvenSecondException.class, () -> evenSecondProcessorWrapper.process(message));
+    }
+
+    @Test
+    @DisplayName("Test for change feld processor")
+    public void changeOrderProcessor_InHistoryShouldRemainOriginal_CheckShouldReturnTrue() {
+        //given
+        processor = new ChangeOrderProcessor();
+        String originalMessage = message.toString();
+
+        //when
+        message = processor.process(message);
+
+        //then
+        assertEquals(message, messageTemplate);
     }
 }

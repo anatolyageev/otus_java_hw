@@ -5,7 +5,7 @@ import ru.otus.model.Message;
 import ru.otus.repository.HistoryRepository;
 
 public class HistoryServiceImpl implements ru.otus.service.HistoryService {
-    private HistoryRepository historyRepository;
+    private final HistoryRepository historyRepository;
 
     public HistoryServiceImpl(HistoryRepository historyRepository) {
         this.historyRepository = historyRepository;
