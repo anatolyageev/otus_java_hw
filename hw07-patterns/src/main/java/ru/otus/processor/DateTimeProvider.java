@@ -1,4 +1,4 @@
-package ru.otus.model;
+package ru.otus.processor;
 
 import java.time.LocalDateTime;
 

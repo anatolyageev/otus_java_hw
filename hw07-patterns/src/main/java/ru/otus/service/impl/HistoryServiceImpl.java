@@ -1,7 +1,6 @@
 package ru.otus.service.impl;
 
 import java.util.Map;
-import ru.otus.model.Message;
 import ru.otus.model.MessageHistory;
 import ru.otus.repository.HistoryRepository;
 

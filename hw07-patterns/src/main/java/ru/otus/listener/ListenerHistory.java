@@ -3,6 +3,7 @@ package ru.otus.listener;
 import ru.otus.model.Message;
 import ru.otus.model.MessageHistory;
 import ru.otus.service.HistoryService;
+import ru.otus.utils.ListnersHelper;
 
 public class ListenerHistory implements Listener {
 
@@ -14,6 +15,11 @@ public class ListenerHistory implements Listener {
 
     @Override
     public void onUpdated(Message oldMsg, Message newMsg) {
-        historyService.addHistory(new MessageHistory(oldMsg, newMsg));
+        Message archiveMsg = ListnersHelper.copy(oldMsg, Message.class);
+        historyService.addHistory(new MessageHistory(archiveMsg, newMsg));
+    }
+
+    public Message findMessageById(Long id) {
+        return historyService.getHistoryById(id).getOldMessage();
     }
 }
