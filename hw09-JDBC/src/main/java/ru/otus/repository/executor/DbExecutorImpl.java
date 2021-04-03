@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import ru.otus.sessionmanager.DataBaseOperationException;
+import ru.otus.exceptions.DataBaseOperationException;
 
 public class DbExecutorImpl implements DbExecutor {
 
@@ -49,8 +49,8 @@ public class DbExecutorImpl implements DbExecutor {
             try (var rs = pst.executeQuery()) {
                 if (rs.next()) {
                     return Optional.ofNullable(rsHandler.apply(rs));
-                }else {
-                    return  Optional.empty();
+                } else {
+                    return Optional.empty();
                 }
             }
         } catch (SQLException ex) {

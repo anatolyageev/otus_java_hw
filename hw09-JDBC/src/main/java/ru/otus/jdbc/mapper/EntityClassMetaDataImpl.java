@@ -2,10 +2,8 @@ package ru.otus.jdbc.mapper;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.sql.Connection;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import ru.otus.model.Id;
 
@@ -20,10 +18,10 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
     private final Constructor constructor;
     private final List<Field> declaredFields;
 
-    public EntityClassMetaDataImpl(Class<T> classMeta){
+    public EntityClassMetaDataImpl(Class<T> classMeta) {
         this.classMeta = classMeta;
-        this.idField = requireNonNull(getFieldWithAnnotation(Id.class,classMeta),"Class should contained Id field");
-        this.constructor = requireNonNull(getDefaultConstruct(classMeta),"Class should contained default constructor");
+        this.idField = requireNonNull(getFieldWithAnnotation(Id.class, classMeta), "Class should contained Id field");
+        this.constructor = requireNonNull(getDefaultConstruct(classMeta), "Class should contained default constructor");
         this.declaredFields = Arrays.asList(classMeta.getDeclaredFields());
     }
 

@@ -1,0 +1,1 @@
+alter table manager rename column name to label;

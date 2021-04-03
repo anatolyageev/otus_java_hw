@@ -1,4 +1,4 @@
-package ru.otus.jdbc.mapper;
+package ru.otus.exceptions;
 
 public class JdbcMapperException extends RuntimeException{
     public JdbcMapperException(String message) {

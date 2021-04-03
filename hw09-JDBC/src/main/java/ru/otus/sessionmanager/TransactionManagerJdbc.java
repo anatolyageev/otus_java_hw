@@ -3,6 +3,7 @@ package ru.otus.sessionmanager;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
 import javax.sql.DataSource;
+import ru.otus.exceptions.DataBaseOperationException;
 
 public class TransactionManagerJdbc implements TransactionManager {
     private final DataSource dataSource;

@@ -32,7 +32,7 @@ public class HomeWork {
         var dbExecutor = new DbExecutorImpl();
 
 // Работа с клиентом
-        EntityClassMetaData entityClassMetaDataClient = new EntityClassMetaDataImpl<>(Client.class);
+        EntityClassMetaData<Client> entityClassMetaDataClient = new EntityClassMetaDataImpl<>(Client.class);
         EntitySQLMetaData entitySQLMetaDataClient = new EntitySQLMetaDataImpl(entityClassMetaDataClient);
         var dataTemplateClient = new DataTemplateJdbc<Client>(dbExecutor, entitySQLMetaDataClient, entityClassMetaDataClient);
 
@@ -48,17 +48,17 @@ public class HomeWork {
 
 // Сделайте тоже самое с классом Manager (для него надо сделать свою таблицу)
 
-        EntityClassMetaData entityClassMetaDataManager; // = new EntityClassMetaDataImpl();
-        EntitySQLMetaData entitySQLMetaDataManager = null; //= new EntitySQLMetaDataImpl();
-     //   var dataTemplateManager = new DataTemplateJdbc<Manager>(dbExecutor, entitySQLMetaDataManager, entityClassMetaDataManager);
+        EntityClassMetaData<Manager> entityClassMetaDataManager = new EntityClassMetaDataImpl<>(Manager.class);
+        EntitySQLMetaData entitySQLMetaDataManager = new EntitySQLMetaDataImpl(entityClassMetaDataManager);
+        var dataTemplateManager = new DataTemplateJdbc<Manager>(dbExecutor, entitySQLMetaDataManager, entityClassMetaDataManager);
 
-     //   var dbServiceManager = new DbServiceManagerImpl(transactionManager, dataTemplateManager);
-//        dbServiceManager.saveManager(new Manager("ManagerFirst"));
-//
-//        var managerSecond = dbServiceManager.saveManager(new Manager("ManagerSecond"));
-//        var managerSecondSelected = dbServiceManager.getManager(managerSecond.getNo())
-//                .orElseThrow(() -> new RuntimeException("Manager not found, id:" + managerSecond.getNo()));
-//        log.info("managerSecondSelected:{}", managerSecondSelected);
+        var dbServiceManager = new DbServiceManagerImpl(transactionManager, dataTemplateManager);
+        dbServiceManager.saveManager(new Manager("ManagerFirst"));
+
+        var managerSecond = dbServiceManager.saveManager(new Manager("ManagerSecond"));
+        var managerSecondSelected = dbServiceManager.getManager(managerSecond.getNo())
+                .orElseThrow(() -> new RuntimeException("Manager not found, id:" + managerSecond.getNo()));
+        log.info("managerSecondSelected:{}", managerSecondSelected);
     }
 
     private static void flywayMigrations(DataSource dataSource) {

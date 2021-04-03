@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import ru.otus.exceptions.JdbcMapperException;
 import ru.otus.repository.DataTemplate;
 import ru.otus.repository.executor.DbExecutor;
 
@@ -27,7 +28,7 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
 
     @Override
     public Optional<T> findById(Connection connection, long id) {
-        return dbExecutor.executeSelect(connection, entitySQLMetaData.getSelectByIdSql(),id,this::createObjectFromResultSet);
+        return dbExecutor.executeSelect(connection, entitySQLMetaData.getSelectByIdSql(), id, this::createObjectFromResultSet);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
 
     @Override
     public long insert(Connection connection, T client) {
-         return  dbExecutor.executeStatement(connection,entitySQLMetaData.getInsertSql(),getFieldValuesList(client));
+        return dbExecutor.executeStatement(connection, entitySQLMetaData.getInsertSql(), getFieldValuesList(client));
     }
 
     @Override
@@ -58,24 +59,19 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
         return params;
     }
 
-    private T createObjectFromResultSet(ResultSet rs)  {
-
+    private T createObjectFromResultSet(ResultSet rs) {
         try {
-
             final T instance = entityClassMetaData.getConstructor().newInstance();
-
             var idField = entityClassMetaData.getIdField();
             idField.setAccessible(true);
             idField.set(instance, rs.getObject(idField.getName()));
-
             for (var filed : entityClassMetaData.getFieldsWithoutId()) {
                 filed.setAccessible(true);
                 filed.set(instance, rs.getObject(filed.getName()));
             }
-
             return instance;
         } catch (IllegalAccessException | InstantiationException | SQLException | InvocationTargetException e) {
-           throw  new  JdbcMapperException ("Object cannot be created");
+            throw new JdbcMapperException("Object cannot be created");
         }
     }
 }

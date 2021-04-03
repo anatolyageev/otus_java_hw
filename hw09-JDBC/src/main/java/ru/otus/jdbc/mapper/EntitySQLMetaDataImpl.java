@@ -18,8 +18,8 @@ public class EntitySQLMetaDataImpl implements EntitySQLMetaData {
 
     @Override
     public String getSelectByIdSql() {
-        return String.format("select id, %s from %s where %s = ?"
-                , getFieldsString()
+        return String.format("select %s from %s where %s = ?"
+                , getAllFieldsString()
                 , entityClassMetaData.getName().toLowerCase()
                 , entityClassMetaData.getIdField().getName()
         );
@@ -34,6 +34,13 @@ public class EntitySQLMetaDataImpl implements EntitySQLMetaData {
                         .map(v -> "?")
                         .collect(Collectors.joining(","))
         );
+    }
+
+    private String getAllFieldsString() {
+        return entityClassMetaData.getAllFields().stream()
+                .map(Field::getName)
+                .collect(Collectors.joining(","))
+                .toLowerCase();
     }
 
     private String getFieldsString() {

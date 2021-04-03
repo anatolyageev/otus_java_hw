@@ -49,6 +49,6 @@ public class DbServiceManagerImpl implements DBServiceManager {
             var managerList = managerDataTemplate.findAll(connection);
             log.info("managerList:{}", managerList);
             return managerList;
-       });
+        });
     }
 }
