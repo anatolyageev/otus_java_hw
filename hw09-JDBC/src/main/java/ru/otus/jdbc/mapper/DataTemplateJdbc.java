@@ -1,5 +1,6 @@
 package ru.otus.jdbc.mapper;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -63,15 +64,20 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
         try {
             final T instance = entityClassMetaData.getConstructor().newInstance();
             var idField = entityClassMetaData.getIdField();
-            idField.setAccessible(true);
-            idField.set(instance, rs.getObject(idField.getName()));
+
+            setFieldValue(idField, rs.getObject(idField.getName()), instance);
+
             for (var filed : entityClassMetaData.getFieldsWithoutId()) {
-                filed.setAccessible(true);
-                filed.set(instance, rs.getObject(filed.getName()));
+                setFieldValue(filed, rs.getObject(filed.getName()), instance);
             }
             return instance;
         } catch (IllegalAccessException | InstantiationException | SQLException | InvocationTargetException e) {
             throw new JdbcMapperException("Object cannot be created");
         }
+    }
+
+    private void setFieldValue(Field field, Object value, T instance) throws IllegalAccessException {
+        field.setAccessible(true);
+        field.set(instance, value);
     }
 }
