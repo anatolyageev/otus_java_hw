@@ -29,7 +29,7 @@ public class Client implements Cloneable {
     private Long id;
 
     private String name;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
     private AddressDataSet addressDataSet;
 

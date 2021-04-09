@@ -8,4 +8,4 @@ include 'hw06-oop'
 include 'hw07-patterns'
 include 'hw08-io'
 include 'hw09-JDBC'
-
+include 'hw10-JPQL'
