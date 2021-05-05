@@ -1,0 +1,30 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.5'
+    id 'java'
+}
+
+group 'ru.otus.hw.ageev'
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+//    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-test")
+    implementation 'ch.qos.logback:logback-classic'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.postgresql:postgresql'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'com.google.code.findbugs:jsr305:3.0.0'
+
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
