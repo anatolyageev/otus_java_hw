@@ -6,9 +6,11 @@
                 <thead>
                 <tr>
                     <td scope="col">Id</td>
-                    <td scope="col">Имя</td>
-                    <td scope="col">Логин</td>
-                    <td scope="col">Пароль</td>
+                    <td scope="col">Name</td>
+                    <td scope="col">Login</td>
+                    <td scope="col">Password</td>
+                    <td scope="col">Street</td>
+                    <td scope="col">Phone</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -18,6 +20,12 @@
                         <td>${user.name}</td>
                         <td>${user.login}</td>
                         <td>${user.password}</td>
+                        <td>${user.addressDataSet.street}</td>
+                        <td>
+                            <#list  user.phoneDataSets as phone>
+                                ${phone.getNumber()} <#sep>,
+                            </#list>
+                        </td>
                     </tr>
                 </#list>
                 </tbody>

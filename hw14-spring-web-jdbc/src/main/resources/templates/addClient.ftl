@@ -20,6 +20,14 @@
                                 <label for="inputName">Name</label>
                                <input type="text" class="form-control" id="inputName" name="name" placeholder="Name">
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputAddress">Address</label>
+                        <input type="text" class="form-control" id="inputAddress" name="address" placeholder="Address">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPhone">Phone</label>
+                        <input type="text" class="form-control" id="inputPhone" name="phone" placeholder="phone">
+                    </div>
 
                 </div>
 <#--              -->

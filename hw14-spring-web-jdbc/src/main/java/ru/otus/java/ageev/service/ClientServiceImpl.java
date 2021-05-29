@@ -25,21 +25,21 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client saveClient(Client client) {
-        return null;
+        return transactionManager.doInTransaction(() -> {
+            log.info("saved client: {}", client);
+            var savedClient = clientRepository.save(client);
+            log.info("saved client: {}", savedClient);
+            return savedClient;
+        });
     }
 
     @Override
     public Optional<Client> getClient(long id) {
-        return Optional.empty();
+        return clientRepository.findById(id);
     }
 
     @Override
     public List<Client> findAll() {
         return (List<Client>) clientRepository.findAll();
-    }
-
-    @Override
-    public Optional<Client> findByLogin(String login) {
-        return Optional.empty();
     }
 }
