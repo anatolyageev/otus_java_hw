@@ -1,7 +1,6 @@
 package ru.otus.java.ageev.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -32,7 +31,7 @@ public class TimeWsController {
         template.convertAndSend("/topic/currentTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)));
     }
 
-    @Scheduled(fixedDelay = 1000)
+    @MessageMapping("/request/all")
     public void getAll() {
        List<Client> clientList = clientService.findAll();
         template.convertAndSend("/topic/allUsers", clientList.toString());
