@@ -2,19 +2,19 @@ package ru.otus.java.ageev.dto;
 
 import java.util.Collections;
 import java.util.HashSet;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
 import ru.otus.java.ageev.domain.AddressDataSet;
 import ru.otus.java.ageev.domain.Client;
 import ru.otus.java.ageev.domain.PhoneDataSet;
+import ru.otus.messagesystem.client.ResultDataType;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientDto {
+@ToString
+public class ClientDto extends ResultDataType {
     private String login;
     private String password;
     private String name;

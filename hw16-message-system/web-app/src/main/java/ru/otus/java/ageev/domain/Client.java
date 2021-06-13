@@ -8,12 +8,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
+import ru.otus.messagesystem.client.ResultDataType;
 
 
 @Getter
 @ToString
 @Table("client")
-public class Client {
+public class Client extends ResultDataType {
     @Id
     private final Long id;
     @Nonnull
