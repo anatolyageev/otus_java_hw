@@ -1,7 +1,5 @@
 package ru.otus.java.ageev.service;
 
-import java.util.List;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +7,9 @@ import org.springframework.stereotype.Service;
 import ru.otus.java.ageev.domain.Client;
 import ru.otus.java.ageev.repository.ClientRepository;
 import ru.otus.java.ageev.sessionmanager.TransactionManager;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements ClientService {

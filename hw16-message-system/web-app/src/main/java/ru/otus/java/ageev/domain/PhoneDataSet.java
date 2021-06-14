@@ -5,12 +5,12 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.relational.core.mapping.Table;
-
+import ru.otus.messagesystem.client.ResultDataType;
 
 @Getter
 @Table("phone_data")
 @ToString(of = {"number"})
-public class PhoneDataSet {
+public class PhoneDataSet extends ResultDataType {
     @Id
     private Long id;
     private String number;
@@ -22,9 +22,7 @@ public class PhoneDataSet {
         this.number = number;
         this.clientId = clientId;
     }
-
     public PhoneDataSet(String number) {
         this(null, number, null);
     }
-
 }

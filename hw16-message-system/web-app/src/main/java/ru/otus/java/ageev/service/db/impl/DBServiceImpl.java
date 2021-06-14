@@ -1,17 +1,16 @@
 package ru.otus.java.ageev.service.db.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.java.ageev.domain.Client;
 import ru.otus.java.ageev.dto.ClientMessageDto;
 import ru.otus.java.ageev.repository.ClientRepository;
 import ru.otus.java.ageev.service.db.DBService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.otus.java.ageev.sessionmanager.TransactionManager;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DBServiceImpl implements DBService {

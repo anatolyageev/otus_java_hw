@@ -32,7 +32,9 @@ public class GetClientDataRequestHandler implements RequestHandler<ClientMessage
         if (MessageType.USER_DATA.getName().equals(msg.getType())) {
             return getClient(msg, client);
         }
-
+        if (MessageType.USER_SAVE.getName().equals(msg.getType())) {
+            return saveClient(msg, client);
+        }
         return Optional.empty();
     }
 
@@ -40,6 +42,13 @@ public class GetClientDataRequestHandler implements RequestHandler<ClientMessage
         ClientMessageDto clientData = dbService.getClient(client.getId());
         logger.info("clientData {}", clientData);
         return Optional.of(MessageBuilder.buildReplyMessage(msg, clientData));
+    }
+
+    private  Optional<Message> saveClient(Message msg, ClientMessageDto client){
+        Client clientResult = dbService.saveClient(client.getClient());
+
+        logger.info("saveClient {}", clientResult);
+        return Optional.of(MessageBuilder.buildReplyMessage(msg, new ClientMessageDto(clientResult)));
     }
 
 }

@@ -8,12 +8,6 @@ public class RootController {
 
     @GetMapping("/")
     public String defaultPage(){
-        return "index";
+        return "serverWsTime.html";
     }
-
-    @GetMapping("/serverWs")
-    public String serverTimePage(){
-        return "serverWsTime";
-    }
-
 }

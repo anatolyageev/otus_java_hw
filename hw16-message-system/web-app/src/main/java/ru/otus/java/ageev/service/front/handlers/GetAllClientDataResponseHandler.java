@@ -3,7 +3,7 @@ package ru.otus.java.ageev.service.front.handlers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ru.otus.java.ageev.dto.ClientMessageDto;
+import ru.otus.java.ageev.dto.ClientList;
 import ru.otus.messagesystem.RequestHandler;
 import ru.otus.messagesystem.client.CallbackRegistry;
 import ru.otus.messagesystem.client.MessageCallback;
@@ -13,13 +13,14 @@ import ru.otus.messagesystem.message.MessageHelper;
 
 import java.util.Optional;
 
-@Service("clientDataResponseHandler")
-public class GetClientDataResponseHandler implements RequestHandler<ClientMessageDto> {
-    private static final Logger logger = LoggerFactory.getLogger(GetClientDataResponseHandler.class);
+
+@Service("allClientDataResponseHandler")
+public class GetAllClientDataResponseHandler implements RequestHandler<ClientList> {
+    private static final Logger logger = LoggerFactory.getLogger(GetAllClientDataResponseHandler.class);
 
     private final CallbackRegistry callbackRegistry;
 
-    public GetClientDataResponseHandler(CallbackRegistry callbackRegistry) {
+    public GetAllClientDataResponseHandler(CallbackRegistry callbackRegistry) {
         this.callbackRegistry = callbackRegistry;
     }
 

@@ -8,15 +8,13 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import ru.otus.java.ageev.domain.Client;
+import ru.otus.java.ageev.dto.ClientList;
 import ru.otus.java.ageev.dto.ClientMessageDto;
 import ru.otus.java.ageev.service.ClientService;
-import ru.otus.java.ageev.service.db.handlers.GetClientDataRequestHandler;
 import ru.otus.java.ageev.service.front.FrontendService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import static java.util.Objects.nonNull;
 import static ru.otus.java.ageev.config.WebSocketConfig.DATE_TIME_FORMAT;
@@ -42,20 +40,31 @@ public class TimeWsController {
 
     @MessageMapping("/request/all")
     public void getAll() {
-       List<Client> clientList = clientService.findAll();
-        template.convertAndSend("/topic/allUsers", clientList.toString());
+        frontendService.findAll(this::replyGetAll);
     }
+
 
     @MessageMapping("/request/{id}")
     public void getClientById(@DestinationVariable long id) {
-
-
-        frontendService.getClient(id, this::reply);
-    //   Client client = clientService.getClient(id).get();
-     //   template.convertAndSend("/topic/userId", client.toString());
+        frontendService.getClient(id, this::replyGet);
     }
 
-    private void reply(ClientMessageDto client) {
-        template.convertAndSend("/topic/userId", nonNull(client) ? client.toString() : "Not found");
+    @MessageMapping("/request/save")
+    public void createClient(ClientMessageDto clientDto) {
+        logger.info("clientDto: {}", clientDto);
+        frontendService.saveClient(clientDto, this::replySave);
+        getAll();
+    }
+
+    private void replyGet(ClientMessageDto client) {
+        template.convertAndSend("/topic/userId", nonNull(client) ? client : "Not found");
+    }
+
+    private void replySave(ClientMessageDto client) {
+        template.convertAndSend("/topic/saveUser", client);
+    }
+
+    private void replyGetAll(ClientList clientList) {
+        template.convertAndSend("/topic/allUsers", clientList);
     }
 }

@@ -1,12 +1,10 @@
 package ru.otus.java.ageev.config;
 
-import lombok.val;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.otus.java.ageev.domain.Client;
+import ru.otus.java.ageev.dto.ClientList;
 import ru.otus.java.ageev.dto.ClientMessageDto;
 import ru.otus.messagesystem.*;
 import ru.otus.messagesystem.client.CallbackRegistry;
@@ -32,19 +30,24 @@ public class MessageSystemConfig {
         return new CallbackRegistryImpl();
     }
 
+
     @Bean("frontHandlerStore")
-    public HandlersStore frontHandlerStore(@Qualifier("clientDataResponseHandler") RequestHandler<ClientMessageDto> handler) {
-        var store = new HandlersStoreImpl();
+    public HandlersStore frontHandlerStore(@Qualifier("clientDataResponseHandler") RequestHandler<ClientMessageDto> handler,
+                                           @Qualifier("allClientDataResponseHandler") RequestHandler<ClientList> listHandler) {
+        HandlersStore store = new HandlersStoreImpl();
         store.addHandler(MessageType.USER_DATA, handler);
-//        store.addHandler(MessageType.USER_SAVE, handler);
+        store.addHandler(MessageType.USER_SAVE, handler);
+        store.addHandler(MessageType.USER_ALL, listHandler);
         return store;
     }
 
     @Bean("dbHandlerStore")
-    public HandlersStore dbHandlerStore(@Qualifier("clientDataRequestHandler") RequestHandler<ClientMessageDto> handler) {
-        var store = new HandlersStoreImpl();
+    public HandlersStore dbHandlerStore(@Qualifier("clientDataRequestHandler") RequestHandler<ClientMessageDto> handler,
+                                        @Qualifier("allClientDataRequestHandler") RequestHandler<ClientList> listHandler) {
+        HandlersStore store = new HandlersStoreImpl();
         store.addHandler(MessageType.USER_DATA, handler);
-//        store.addHandler(MessageType.USER_SAVE, handler);
+        store.addHandler(MessageType.USER_SAVE, handler);
+        store.addHandler(MessageType.USER_ALL, listHandler);
         return store;
     }
 
