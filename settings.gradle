@@ -14,4 +14,6 @@ include 'hw12-WebServer'
 include 'hw14-spring-web-jdbc'
 include 'hw13-DI'
 include 'hw15-executors'
+include 'hw16-message-system:web-app'
+include 'hw16-message-system:MessageSystem'
 

@@ -1,0 +1,17 @@
+app:
+  datasource:
+    demo-db:
+      jdbcUrl: jdbc:postgresql://localhost:5430/demoDB
+      username: usr
+      password: pwd
+    flyway:
+      enabled: true
+      clean-on-validation-error: true
+  frontendService: frontendService
+  dbService: dbService
+spring:
+  freemarker:
+    template-loader-path: classpath:/templates
+    suffix: .ftl
+#server:
+#  port: 8585
